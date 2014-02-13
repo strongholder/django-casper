@@ -43,7 +43,7 @@ class CasperTestCase(LiveServerTestCase):
         """
 
         kwargs.update({
-            'load-images': 'no',
+            'load-images': 'yes',
             'disk-cache': 'yes' if self.use_phantom_disk_cache else 'no',
             'ignore-ssl-errors': 'yes',
             'url-base': self.live_server_url
