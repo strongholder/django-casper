@@ -53,7 +53,10 @@ class CasperTestCase(LiveServerTestCase):
         if cn in self.client.cookies:
             kwargs['cookie-' + cn] = self.client.cookies[cn].value
 
-        cmd = ['casperjs', 'test', '--no-colors']
+        if hasattr(settings, "PHANTOMJS_PATH"):
+            os.environ["PATH"] += os.pathsep + settings.PHANTOMJS_PATH
+
+        cmd = [os.path.join(settings.CASPER_PATH, 'casperjs'), 'test', '--no-colors']
         cmd.extend([('--%s=%s' % i) for i in kwargs.iteritems()])
         cmd.append(test_filename)
 
